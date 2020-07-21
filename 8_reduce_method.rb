@@ -8,13 +8,26 @@ Below we try to implement the #reduce method from scratch.
 array = [1, 2, 3, 4, 5]
 
 # Original Implementation
-array.reduce { |acc, num| acc + num}
-array.reduce(10) { |acc, num| acc + num }
+puts "=== ORIGINAL IMPLEMENTATION ==="
+p array.reduce { |acc, num| acc + num}                # => 15
+p array.reduce(10) { |acc, num| acc + num }           # => 25
 
 # Attempted Implementation
-# TODO
+def reduce(arr, acc=0)
+  sum = acc
+  counter = 0
+
+  while counter < arr.size
+    element = arr[counter]
+    sum = yield(sum, element)
+    counter += 1
+  end
+
+  sum
+end
 
 # Attempted Invocation
-reduce(array) { |acc, num| acc + num }              # => 15
-reduce(array, 10) { |acc, num| acc + num }          # => 25
-reduce(array) { |acc, num| acc + num if num.odd? }  # NoMethodError: undefined method '+' for nil:NilClass
+puts "=== ATTEMPTED IMPLEMENTATION ==="
+p reduce(array) { |acc, num| acc + num }              # => 15
+p reduce(array, 10) { |acc, num| acc + num }          # => 25
+p reduce(array) { |acc, num| acc + num if num.odd? }  # NoMethodError: undefined method '+' for nil:NilClass
